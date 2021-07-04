@@ -1,0 +1,365 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : GGez
+ Source Server Type    : MySQL
+ Source Server Version : 100417
+ Source Host           : localhost:3306
+ Source Schema         : shopping_db
+
+ Target Server Type    : MySQL
+ Target Server Version : 100417
+ File Encoding         : 65001
+
+ Date: 11/02/2021 22:39:29
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for orderdetails
+-- ----------------------------
+DROP TABLE IF EXISTS `orderdetails`;
+CREATE TABLE `orderdetails`  (
+  `detail_id` int(255) NOT NULL AUTO_INCREMENT,
+  `OrderID` int(255) NULL DEFAULT NULL,
+  `Number` int(255) NULL DEFAULT NULL,
+  `Price` decimal(10, 2) NULL DEFAULT NULL,
+  `ProductID` int(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`detail_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orderdetails
+-- ----------------------------
+INSERT INTO `orderdetails` VALUES (1, 1, 5, 25.00, 17);
+INSERT INTO `orderdetails` VALUES (2, 2, 1, 25.00, 16);
+INSERT INTO `orderdetails` VALUES (3, 2, 1, 25.00, 17);
+INSERT INTO `orderdetails` VALUES (4, 3, 1, 25.00, 16);
+INSERT INTO `orderdetails` VALUES (5, 4, 1, 25.00, 16);
+INSERT INTO `orderdetails` VALUES (6, 5, 3, 25.00, 16);
+INSERT INTO `orderdetails` VALUES (7, 5, 1, 25.00, 17);
+INSERT INTO `orderdetails` VALUES (8, 6, 2, 25.00, 18);
+INSERT INTO `orderdetails` VALUES (9, 7, 1, 25.00, 16);
+INSERT INTO `orderdetails` VALUES (10, 8, 2, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (11, 9, 2, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (12, 10, 1, 25.00, 16);
+INSERT INTO `orderdetails` VALUES (13, 10, 1, 25.00, 17);
+INSERT INTO `orderdetails` VALUES (14, 11, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (15, 12, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (16, 13, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (17, 14, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (18, 15, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (19, 16, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (20, 17, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (21, 18, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (22, 19, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (23, 20, 1, 99999.00, 26);
+INSERT INTO `orderdetails` VALUES (24, 21, 1, 99999.00, 26);
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `OrderID` int(11) NOT NULL AUTO_INCREMENT,
+  `Total` double NULL DEFAULT NULL,
+  `OrderDate` timestamp(0) NULL DEFAULT NULL,
+  `ShippingMethod` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `Delivery_S` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `Delivery_C` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `Parcel_Num` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `DateDeliver` datetime(0) NULL DEFAULT NULL,
+  `DatePay` datetime(0) NULL DEFAULT NULL,
+  `Dates` datetime(0) NULL DEFAULT NULL,
+  `MapLocation` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `Time` time(0) NULL DEFAULT NULL,
+  `Bankname` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `PayStatus_W` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `PayStatus_E` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `PayStatus_P` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `OrderHistory` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `MemberID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `PointsNumber` int(11) NULL DEFAULT NULL,
+  `notification_FK` int(255) NULL DEFAULT NULL,
+  `notification_type` int(255) NULL DEFAULT NULL,
+  `read_status` int(255) NULL DEFAULT NULL,
+  `accept_FK` int(255) NULL DEFAULT NULL,
+  `lat` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'latitude',
+  `lng` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'longitude',
+  PRIMARY KEY (`OrderID`) USING BTREE,
+  UNIQUE INDEX `MemberID`(`MemberID`, `PointsNumber`) USING BTREE,
+  INDEX `point_id`(`PointsNumber`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (1, NULL, '2021-01-30 17:44:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 0, 0, NULL, NULL);
+INSERT INTO `orders` VALUES (2, NULL, '2021-01-30 17:46:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '555/666', NULL, NULL, NULL, NULL, NULL, NULL, '6', NULL, 0, 1, 0, 2, NULL, NULL);
+INSERT INTO `orders` VALUES (3, NULL, '2021-02-02 17:08:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 0, 2, NULL, NULL);
+INSERT INTO `orders` VALUES (4, NULL, '2021-02-02 17:12:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 0, 2, NULL, NULL);
+INSERT INTO `orders` VALUES (5, NULL, '2021-02-03 12:41:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 0, 2, NULL, NULL);
+INSERT INTO `orders` VALUES (6, NULL, '2021-02-03 13:02:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '466/225', NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL, 0, 1, 0, 3, NULL, NULL);
+INSERT INTO `orders` VALUES (7, NULL, '2021-02-04 13:04:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '466/225', NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL, 0, 1, 0, 2, NULL, NULL);
+INSERT INTO `orders` VALUES (8, NULL, '2021-02-04 13:04:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '466/225', NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL, 0, 1, 1, 0, NULL, NULL);
+INSERT INTO `orders` VALUES (9, NULL, '2021-02-03 13:05:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '466/225', NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL, 0, 1, 1, 0, NULL, NULL);
+INSERT INTO `orders` VALUES (10, NULL, '2021-02-07 12:53:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 1, 0, '17.4335917', '102.7480011');
+INSERT INTO `orders` VALUES (11, NULL, '2021-02-07 15:16:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 0, 0, '17.4335917', '102.7480011');
+INSERT INTO `orders` VALUES (20, NULL, '2021-02-07 21:01:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 1, 0, '17.4335917', '102.7480011');
+INSERT INTO `orders` VALUES (21, NULL, '2021-02-07 21:03:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '112/10 901', NULL, NULL, NULL, NULL, NULL, NULL, '10207617313946822', NULL, 0, 1, 0, 2, '17.4335917', '102.7480011');
+
+-- ----------------------------
+-- Table structure for points
+-- ----------------------------
+DROP TABLE IF EXISTS `points`;
+CREATE TABLE `points`  (
+  `PointsNumber` int(11) NOT NULL AUTO_INCREMENT,
+  `RewardPoints` double NULL DEFAULT NULL,
+  `DatePoints` datetime(0) NULL DEFAULT NULL,
+  `TimePoints` time(0) NULL DEFAULT NULL,
+  `RewardPoints_R` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `RewardPoints_E` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`PointsNumber`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of points
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for product_pixs
+-- ----------------------------
+DROP TABLE IF EXISTS `product_pixs`;
+CREATE TABLE `product_pixs`  (
+  `ProductID` int(11) NOT NULL,
+  `Pno` int(11) NOT NULL,
+  `NamePicture` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`ProductID`, `Pno`) USING BTREE,
+  UNIQUE INDEX `ProductID`(`ProductID`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of product_pixs
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_product
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product`;
+CREATE TABLE `tbl_product`  (
+  `p_id` int(11) NOT NULL AUTO_INCREMENT,
+  `p_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `p_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_price` int(50) NOT NULL,
+  `p_img` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `datesave` timestamp(0) NOT NULL DEFAULT current_timestamp(0),
+  `PromotionID` int(11) NOT NULL,
+  PRIMARY KEY (`p_id`) USING BTREE,
+  UNIQUE INDEX `type_id`(`type_id`, `PromotionID`) USING BTREE,
+  INDEX `promotion_ID`(`PromotionID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbl_product
+-- ----------------------------
+INSERT INTO `tbl_product` VALUES (16, 'บราวนี่', 3, 'กรอบนอก นุ่มใน          ', 25, 'p_img151137747720201216_001804.jpg', '2020-12-16 00:18:04', 1);
+INSERT INTO `tbl_product` VALUES (17, 'พิซซ่า', 13, 'หอม หวาน                                                                                                                                                                                                                                                                                                                                                               ', 25, '44507109620210131_231318.gif', '0000-00-00 00:00:00', 1);
+INSERT INTO `tbl_product` VALUES (18, 'พิซซ่า', 1, 'หอม หวาน                                                                              ', 25, '171312123420210131_231415.jpg', '0000-00-00 00:00:00', 1);
+INSERT INTO `tbl_product` VALUES (20, '', 0, '', 0, 'p_img13644681620210202_114557.jpg', '2021-02-02 11:45:57', 0);
+INSERT INTO `tbl_product` VALUES (26, 'เจปังหมายเลข 44', 1, 'อร่อย', 99999, '28488431520210202_120855.jpg', '2021-02-02 12:08:55', 0);
+
+-- ----------------------------
+-- Table structure for tbl_promotion
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_promotion`;
+CREATE TABLE `tbl_promotion`  (
+  `Pro_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Pro_Name` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Pro_Des` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Discount` double NOT NULL,
+  `StartDate` date NOT NULL,
+  `EndDate` date NOT NULL,
+  PRIMARY KEY (`Pro_ID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbl_promotion
+-- ----------------------------
+INSERT INTO `tbl_promotion` VALUES (1, 'วาเลนไทน์เดย์', 'โปรโมชั่นเปิดร้านออนไลน์\nซื้อขนมปัง 1 ชิ้นรับทันทีคะแนนสะสม 10 แต้ม\n100 แต้มสามารถแลก ขนมปัง 1 ชิ้นได้\nหมดเขต 31 มกราคม 2563                                                   ', 100, '2020-12-12', '2021-01-31');
+INSERT INTO `tbl_promotion` VALUES (2, 'เปิดร้านใหม่', 'โปรโมชั่นเปิดร้านออนไลน์\nซื้อขนมปัง 1 ชิ้นรับทันทีคะแนนสะสม 10 แต้ม\n100 แต้มสามารถแลก ขนมปัง 1 ชิ้นได้\nหมดเขต 31 มกราคม 2563                                                   ', 10, '2020-12-12', '2021-02-02');
+INSERT INTO `tbl_promotion` VALUES (3, 'อยากลด', 'ลดให้งงกันเฉยๆ นิ ♥', 2000, '2021-02-02', '2021-02-02');
+
+-- ----------------------------
+-- Table structure for tbl_type
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_type`;
+CREATE TABLE `tbl_type`  (
+  `type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `type_des` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`type_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbl_type
+-- ----------------------------
+INSERT INTO `tbl_type` VALUES (1, 'ขนมปังจ๋า', '');
+INSERT INTO `tbl_type` VALUES (2, 'คุกกี้จ๋า', '');
+INSERT INTO `tbl_type` VALUES (3, 'บราวนี่', '');
+INSERT INTO `tbl_type` VALUES (13, 'พิซซ่า', '');
+INSERT INTO `tbl_type` VALUES (14, '7LS', '');
+INSERT INTO `tbl_type` VALUES (15, 'oil1', '');
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lastname` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tel` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `birthdate` date NULL DEFAULT NULL,
+  `Picture` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `FbID` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `RemainingPoints` double NULL DEFAULT NULL,
+  `username` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `T_Face` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `addr` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `trn_date` datetime(0) NULL DEFAULT NULL,
+  `fb_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`ID`, `fb_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, 'อมฤต', 'ละน้อย', '0908529709', NULL, NULL, NULL, NULL, 'dookprox1', '123456', 'dookprox1@gmail.com', '', '466/19 456', 2, NULL, '');
+INSERT INTO `user` VALUES (3, 'oiloil', 'oil', '', NULL, '138437127020210204_172134.jpg', NULL, NULL, 'adminoil1', '123456', 'sellOil@gmail.com', '', '', 1, '2020-08-22 16:45:51', '');
+INSERT INTO `user` VALUES (4, 'useroil', 'lasoil', '0123456789', '2020-12-18', '140025020_461274638205659_8725058576104662482_n.jpg', NULL, NULL, 'useroil', '123456', 'oil001@gmail.com', '', '466/225', 2, '2020-08-22 16:46:41', '');
+INSERT INTO `user` VALUES (5, 'พนักงานน่ารักน่ารัก', 'ขายสินค้า', '0908529709', '1996-08-19', '140025020_461274638205659_8725058576104662482_n.jpg', NULL, NULL, 'selloil', '123456', 'sellOil@gmail.com', '', '466/19', 3, NULL, '');
+INSERT INTO `user` VALUES (7, 'กาญจนา', 'สุขใจ', '0945154789', NULL, NULL, NULL, NULL, 'baem24', '445599', 'ok-you@windowslive.com', '', '1234', 2, '2020-12-23 21:43:07', '');
+INSERT INTO `user` VALUES (8, 'อรพรรณ', ' ผันสนาม', '0947926493', NULL, NULL, NULL, NULL, 'Aom45', '669933', 'ok-you@windowslive.com', '', '', 2, '2020-12-23 21:45:15', '');
+INSERT INTO `user` VALUES (10, '7LS', '7LS', '2021-01-13', '0000-00-00', '183732763720210202_122423.gif', NULL, NULL, '7LS', '7LS', '5616512', '', '', 3, NULL, '');
+INSERT INTO `user` VALUES (12, 'Saven Todd', '7LS', '1234567890', '2021-01-27', NULL, NULL, NULL, 'SavenTodd', '123456', 'alphonse.mustang.wilson@gmail.com', '', '112/10 901', 0, NULL, '10207617313946822');
+INSERT INTO `user` VALUES (13, '7LS', '1234567890', '2021-01-29', '0000-00-00', NULL, NULL, NULL, '123456', 'alphonse.mustang.wilson@gmail.com', '+925168165156', '', '10207617313946822', 3, NULL, '');
+INSERT INTO `user` VALUES (54, 'oil', 'oil', '0908529709', NULL, '22968102820210204_171616.jpg', NULL, NULL, 'adminoil2', '123456', 'sellOil@gmail.com', '', '', 1, '2021-02-02 00:04:02', '');
+INSERT INTO `user` VALUES (55, 'oil', 'oil', '0908529709', NULL, '3239158520210202_002006.jpg', NULL, NULL, 'selloil2', 'selloil2', 'sellOil@gmail.com', '', '', 3, '2021-02-02 00:20:06', '');
+INSERT INTO `user` VALUES (69, '7LS', '7LS', '7LS', NULL, '207298720720210202_010849.gif', NULL, NULL, '7LS', '7LS', '7LS', '', '7LS', 2, '2021-02-02 01:08:49', '');
+INSERT INTO `user` VALUES (71, '561651', '561651', '165156', NULL, NULL, NULL, NULL, '651', '65156', '15615615616', '', '', 2, '2021-02-11 21:36:37', '');
+INSERT INTO `user` VALUES (72, '561651asd', '561651asd', '165156', NULL, NULL, NULL, NULL, '651sdsd', '65156sdsds', '15615615616', '', '', 2, '2021-02-11 21:37:48', '');
+INSERT INTO `user` VALUES (73, 'a2124', 'a2124', 'a2124', NULL, NULL, NULL, NULL, 'a2124', 'a2124', 'a2124', '', '', 2, '2021-02-11 21:39:00', '');
+INSERT INTO `user` VALUES (74, 'a2124123', 'a2124123', 'a2124123', NULL, NULL, NULL, NULL, 'a2124123', 'a2124123', 'a2124123', '', '', 2, '2021-02-11 21:41:13', '');
+INSERT INTO `user` VALUES (75, 'swqrwt', 'swqrwt', 'swqrwt', NULL, NULL, NULL, NULL, 'swqrwt', 'swqrwt', 'swqrwt', '', '', 2, '2021-02-11 21:43:45', '');
+INSERT INTO `user` VALUES (76, 'swqrwt23', 'swqrwtswqrwt23', 'swqrwt23', NULL, NULL, NULL, NULL, 'swqrwt23', 'swqrwtswqrwt23', 'swqrwt23', '', '', 2, '2021-02-11 21:43:59', '');
+INSERT INTO `user` VALUES (77, 'wwwerww', 'wwwerww', 'wwwerww', NULL, NULL, NULL, NULL, 'wwwerww', 'wwwerww', 'wwwerww', '', '', 2, '2021-02-11 21:45:48', '');
+INSERT INTO `user` VALUES (78, '23213', '23213', '23213', NULL, NULL, NULL, NULL, '23213', '23213', '23213', '', '', 2, '2021-02-11 21:46:21', '');
+INSERT INTO `user` VALUES (79, '23213', '23213', '23213', NULL, NULL, NULL, NULL, '23213', '23213', '23213', '', '', 2, '2021-02-11 21:46:21', '');
+INSERT INTO `user` VALUES (80, '23213111', '23213111', '23213111', NULL, NULL, NULL, NULL, '23213111', '23213111', '23213111', '', '', 2, '2021-02-11 21:46:56', '');
+INSERT INTO `user` VALUES (81, '23213111222', '23213111222', '23213111222', NULL, NULL, NULL, NULL, '23213111222', '23213111222', '23213111222', '', '', 2, '2021-02-11 21:47:41', '');
+INSERT INTO `user` VALUES (82, '23213111222333', '23213111222333', '23213111222333', NULL, NULL, NULL, NULL, '23213111222333', '23213111222333', '23213111222333', '', '', 2, '2021-02-11 21:47:59', '');
+INSERT INTO `user` VALUES (83, '232131112223334444', '232131112223334444', '232131112223334444', NULL, NULL, NULL, NULL, '232131112223334444', '232131112223334444', '232131112223334444', '', '', 2, '2021-02-11 21:51:55', '');
+INSERT INTO `user` VALUES (84, '15859753123', '15859753123', '15859753123', NULL, NULL, NULL, NULL, '15859753123', '15859753123', '15859753123', '', '', 2, '2021-02-11 21:54:40', '');
+INSERT INTO `user` VALUES (85, '158597531239', '158597531239', '158597531239', NULL, NULL, NULL, NULL, '158597531239', '158597531239', '158597531239', '', '', 2, '2021-02-11 21:55:37', '');
+INSERT INTO `user` VALUES (86, '15859753123922', '15859753123922', '15859753123922', NULL, NULL, NULL, NULL, '15859753123922', '15859753123922', '15859753123922', '', '', 2, '2021-02-11 21:57:49', '');
+INSERT INTO `user` VALUES (87, '158597531239222', '158597531239222', '158597531239222', NULL, NULL, NULL, NULL, '158597531239222', '158597531239222', '158597531239222', '', '', 2, '2021-02-11 21:58:47', '');
+INSERT INTO `user` VALUES (88, '1585975312392222', '1585975312392222', '1585975312392222', NULL, NULL, NULL, NULL, '1585975312392222', '1585975312392222', '1585975312392222', '', '', 2, '2021-02-11 21:59:32', '');
+INSERT INTO `user` VALUES (89, '987654321', '987654321', '987654321', NULL, NULL, NULL, NULL, '987654321', '987654321', '987654321', '', '', 2, '2021-02-11 22:01:27', '');
+INSERT INTO `user` VALUES (90, '1231512555555', '1231512555555', '1231512555555', NULL, NULL, NULL, NULL, '1231512555555', '1231512555555', '1231512555555', '', '', 2, '2021-02-11 22:05:50', '');
+INSERT INTO `user` VALUES (91, '12315125555555', '12315125555555', '12315125555555', NULL, NULL, NULL, NULL, '12315125555555', '12315125555555', '12315125555555', '', '', 2, '2021-02-11 22:06:13', '');
+INSERT INTO `user` VALUES (92, '123151255555552', '123151255555552', '123151255555552', NULL, NULL, NULL, NULL, '123151255555552', '123151255555552', '123151255555552', '', '', 2, '2021-02-11 22:06:37', '');
+
+-- ----------------------------
+-- View structure for noti_ul
+-- ----------------------------
+DROP VIEW IF EXISTS `noti_ul`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `noti_ul` AS SELECT
+	orders.OrderID, 
+	orders.OrderDate, 
+	orders.MemberID, 
+	orders.notification_FK, 
+	orders.notification_type, 
+	orders.read_status, 
+	orders.accept_FK,
+	orderdetails.Price, 
+	orderdetails.Number, 
+	SUM(orderdetails.Price * orderdetails.Number) AS sum
+FROM
+	orders
+	INNER JOIN
+	orderdetails
+	ON 
+		orders.OrderID = orderdetails.OrderID
+GROUP BY
+	orders.OrderID, 
+	orders.OrderDate ;
+
+-- ----------------------------
+-- View structure for v_product
+-- ----------------------------
+DROP VIEW IF EXISTS `v_product`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_product` AS SELECT
+	tbl_product.p_id, 
+	tbl_product.p_name, 
+	tbl_type.type_id, 
+	tbl_type.type_name, 
+	tbl_product.p_detail, 
+	tbl_product.p_price, 
+	tbl_product.p_img
+FROM
+	tbl_product
+	INNER JOIN
+	tbl_type
+	ON 
+		tbl_product.type_id = tbl_type.type_id ;
+
+-- ----------------------------
+-- View structure for v_receipt
+-- ----------------------------
+DROP VIEW IF EXISTS `v_receipt`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_receipt` AS SELECT
+	orders.OrderID, 
+	orders.OrderDate, 
+	orders.MemberID, 
+	`user`.`name`, 
+	`user`.lastname, 
+	`user`.tel, 
+	`user`.email, 
+	`user`.addr, 
+	`user`.fb_id, 
+	orderdetails.detail_id, 
+	orderdetails.Number, 
+	orderdetails.Price, 
+	orderdetails.ProductID, 
+	SUM(orderdetails.Price * orderdetails.Number) AS p_total, 
+	tbl_product.p_name, 
+	tbl_product.p_detail, 
+	orders.accept_FK, 
+	orders.lat, 
+	orders.lng
+FROM
+	orders
+	LEFT JOIN
+	`user`
+	ON 
+		orders.MemberID = `user`.ID OR
+		orders.MemberID = `user`.fb_id
+	LEFT JOIN
+	orderdetails
+	ON 
+		orders.OrderID = orderdetails.OrderID
+	INNER JOIN
+	tbl_product
+	ON 
+		orderdetails.ProductID = tbl_product.p_id
+GROUP BY
+	orders.OrderID, 
+	orderdetails.detail_id ;
+
+SET FOREIGN_KEY_CHECKS = 1;

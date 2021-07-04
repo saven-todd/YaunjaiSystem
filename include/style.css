@@ -1,0 +1,512 @@
+.admin-body {
+    background-color: #dddddd4b;
+}
+
+div.head {
+    background-color: #FFCC66;
+}
+
+div.head2 {
+    background-color: #FFCC66;
+}
+
+div.footer {
+    background-color: #FFCC66;
+    margin-top: 10em;
+}
+
+h3.head {
+    margin-bottom: 1em;
+}
+
+h5.total {
+    margin-bottom: 0px;
+}
+
+.order-detail {
+    font-weight: 400;
+}
+
+.container {
+    margin-top: 2em;
+}
+
+.col-md-9 {
+    z-index: -1;
+}
+
+#data {
+    margin-left: -10px;
+    margin-right: 5px;
+    position: relative;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    font-size: 16px;
+    text-align: center;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+.pro-detail {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 2px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd9d;
+}
+
+.register-box {
+    margin: 1em;
+}
+
+.obj-text {
+    float: left;
+    position: relative;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1.15rem;
+}
+
+.row.footer-row {
+    margin-top: 1em;
+}
+
+.product-img {
+    position: relative;
+    align-items: center;
+    width: max-content;
+    border-radius: 1em;
+    max-width: 350px;
+}
+
+.profile-avatar {
+    margin: 1em;
+    border-radius: 50%;
+    width: 5em;
+}
+
+.data-container {
+    width: 100%;
+    z-index: 0;
+}
+
+textarea {
+    overflow: auto;
+    resize: vertical;
+    display: block;
+    width: 100%;
+    /* height: calc(1.5em + .75rem + 2px); */
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s
+}
+
+.add {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.add>.btn-add {
+    padding: 10px 10px 10px 10px;
+    font-weight: 400;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+/* mouse over link */
+
+
+/* Profile Image  */
+
+.profile-pic-upload {
+    max-width: 113px;
+    max-height: 155px;
+    display: block;
+}
+
+.file-upload {
+    display: none;
+}
+
+.circle {
+    border-radius: 1000px !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border: 8px solid rgb(122, 122, 122);
+    position: relative;
+    top: 0;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.p-image {
+    display: flex;
+    border-radius: 50%;
+    position: relative;
+    width: fit-content;
+    top: -40px;
+    right: 0;
+    left: 5.5rem;
+    background-color: white;
+    padding: 10px;
+    color: #666666;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    transform: scale(.75);
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.p-image:hover {
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.upload-button {
+    font-size: 1.2em;
+}
+
+.upload-button:hover {
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    color: #999;
+}
+
+
+/* END Profile Image  */
+
+
+/* Chat Room */
+
+
+/* Chat containers */
+
+
+/* Darker chat container */
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+
+/* Clear floats */
+
+
+/* Style images */
+
+.container>img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+
+/* Style the right image */
+
+.container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+
+/* Style time text */
+
+.time-right {
+    float: right;
+    color: #aaa;
+    text-align-last: left;
+}
+
+
+/* Style time text */
+
+.time-left {
+    float: left;
+    color: #999;
+    text-align-last: right;
+}
+
+
+/* END Chat Room */
+
+
+/* ALERT ANIMATION */
+
+@keyframes blink {
+    0% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: orange;
+    }
+}
+
+@-webkit-keyframes blink {
+    0% {
+        background-color: orange;
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.blink {
+    -webkit-animation: blink 1.5s linear infinite;
+    -moz-animation: blink 1.5s linear infinite;
+    animation: blink 1.5s linear infinite;
+}
+
+
+/* END ALERT ANIMATION */
+
+
+/* PRODUCT CARD  */
+
+@font-face {
+    font-family: K2D;
+    src: url(../include/K2D-Thin.ttf);
+}
+
+.card-product {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    background-color: #0000000a;
+    border-radius: 1em;
+    overflow: hidden;
+    font-family: 'K2D';
+    margin: 1em;
+}
+
+.card-product::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    width: 100%;
+    height: 100%;
+    background: #FFCC66;
+    transform: skewY(345deg) scale(.75);
+    transition: 0.75s;
+    border-radius: 50%;
+}
+
+.card-product:hover:before {
+    top: -69%;
+    transform: skewY(390deg);
+}
+
+.card-product::after {
+    text-align: center;
+    content: 'YAUN JAI';
+    position: absolute;
+    bottom: -101px;
+    left: -46px;
+    font-weight: 700;
+    font-size: 10em;
+    color: rgba(0, 0, 0, 0.068);
+    transform: skewY( 345deg) scale(.75);
+}
+
+.card-product .imgBx {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    z-index: 1;
+    border-radius: 15px;
+}
+
+.card-product .imgBx img {
+    max-width: 213px;
+    max-height: 200px;
+    transition: 0.5s;
+    padding: 5px;
+    border: 10px solid #fff;
+    border-radius: 15px;
+}
+
+.card-product:hover .imgBx img {
+    max-width: 50%;
+}
+
+.card-product .content-box {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.card-product .content-box h2 {
+    font-size: 18px;
+    color: #000000;
+    text-shadow: 0px 2px 5px #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align-last: center;
+}
+
+.card-product .content-box h3 {
+    font-size: 16px;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align-last: center;
+}
+
+.card-product .content-box h4 {
+    font-size: 18px;
+    color: #000000;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-product .content-box .buy-product {
+    position: relative;
+    top: 200px;
+    opacity: 0;
+    padding: 10px 30px;
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: none;
+    background: #2196f3;
+    border-radius: 30px;
+    text-transform: uppercase;
+    transition: .5s;
+    letter-spacing: 1px;
+}
+
+.card-product:hover .content-box .buy-product {
+    top: 5px;
+    opacity: 1;
+}
+
+.row-product {
+    justify-content: center;
+}
+
+
+/* END PRODUCT CARD  */
+
+
+/* DashBoard */
+
+.counter {
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    margin: 15px;
+}
+
+.card-home-table {
+    background: #fff;
+    color: var(--main-color);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+}
+
+.card-home-table>.card-header {
+    padding: 15px 30px;
+    border-bottom: 1px solid var(--second-bg-color);
+    position: relative;
+    background: #fff;
+}
+
+
+/* END DashBoard */
+
+.admin-footer {
+    border-top: 4px double black;
+    margin: 2em 1em 4em 1em;
+}
+
+.custom-map-control-button {
+    appearance: button;
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin: 10px;
+    padding: 0 0.5em;
+    height: 40px;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+}
+
+.custom-map-control-button:hover {
+    background: #ebebeb;
+}
+
+#map,
+#map-directions {
+    height: 300px;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.f-10 {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+.report-btn {
+    margin-left: 10px;
+    transform: scale(.75);
+}
+
+.counter {
+    cursor: pointer;
+}

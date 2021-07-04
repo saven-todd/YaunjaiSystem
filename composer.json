@@ -1,0 +1,12 @@
+{
+    "require": {
+        "monolog/monolog": "1.0.*",
+        "ext-gd": "*",
+        "mpdf/mpdf": "^8.0"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4.2"
+        }
+    }
+}

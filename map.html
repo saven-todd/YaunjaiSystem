@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>V2X</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        html,
+        body,
+        #map_canvas {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbvy9FRDIpuVpWYzYkJyVb42DCbbIKwd8&libraries=places,geometry"></script>
+
+</head>
+
+<body>
+    <p> This is it </p>
+    <h1> Hope this works </h1>
+    <div id="delay"></div>
+    <div id="map_canvas"></div>
+    <div id="messages"></div>
+    <script>
+        var addresses = [
+            [
+                [17.4335917, 102.7480011],
+                [17.3986732, 102.7937337]
+            ]
+        ];
+
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+        var bounds;
+        var GeoMarker;
+        var pos, lat1, lng1, loc1;
+        var infoWindow;
+        var polylines = [];
+        infoWindow = new google.maps.InfoWindow();
+
+
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var basel = new google.maps.LatLng(17.3986732, 102.7937337);
+            var mapOptions = {
+                zoom: 14,
+                center: basel
+            }
+            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            directionsDisplay.setMap(map);
+            bounds = new google.maps.LatLngBounds();
+
+        }
+
+
+        var delay = 100;
+
+        function calcRoute(start, end, next) {
+            console.log("calcRoute('" + start + "','" + end + "',next)");
+            var request = {
+                origin: start,
+                destination: end,
+                travelMode: 'DRIVING'
+            };
+            directionsService.route(request,
+                function(result, status) {
+                    if (status == 'OK') {
+
+                        directionsDisplay = new google.maps.DirectionsRenderer({
+                            suppressBicyclingLayer: true,
+                            suppressMarkers: true,
+                            preserveViewport: true // don't zoom to fit the route
+                        });
+                        directionsDisplay.setMap(null);
+                        directionsDisplay.setDirections(result);
+                        customDirectionsRenderer(result, status);
+                        // combine the bounds of the responses
+                        bounds.union(result.routes[0].bounds);
+                        // zoom and center the map to show all the routes
+                        map.fitBounds(bounds);
+                    }
+                    // ====== Decode the error status ======
+                    else {
+                        console.log("status=" + status + " (start=" + start + ", end=" + end + ")");
+                        // === if we were sending the requests to fast, try this one again and increase the delay
+                        if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                            nextAddress--;
+                            delay += 100;
+                            document.getElementById('delay').innerHTML = "delay between requests=" + delay;
+                        } else {
+                            window.alert('Directions request failed due to' + status);
+                        }
+                    }
+                    next();
+                });
+        }
+
+        initialize();
+
+        var nextAddress = 0;
+
+        // ======= Function to call the next Geocode operation when the reply comes back
+
+        function theNext() {
+            if (nextAddress < addresses.length) {
+                console.log('call calcRoute("' + addresses[nextAddress][0] + '","' + addresses[nextAddress][1] + ') delay=' + delay);
+                setTimeout('calcRoute("' + addresses[nextAddress][0] + '","' + addresses[nextAddress][1] + '",theNext)', delay);
+                nextAddress++;
+            } else {
+                map.fitBounds(bounds);
+            }
+        }
+        // ======= Call that function for the first time =======
+        theNext();
+
+        window.onload = getLocation;
+
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                var watchID = navigator.geolocation.watchPosition(getPosition, catchError);
+            } else {
+                alert("HTML Geolocation not supported");
+            }
+        }
+
+        function getPosition(pos) {
+            lng1 = pos.coords.longitude;
+            lat1 = pos.coords.latitude;
+            loc1 = new google.maps.LatLng(lat1, lng1);
+            customDirectionsRenderer();
+        }
+        getLocation();
+
+        function catchError(positionError) {
+            switch (positionError.code) {
+                case positionError.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case positionError.POSITION_UNAVAILABLE:
+                    alert("Location information is not available.");
+                    break;
+                case positionError.PERMISSION_DENIED:
+                    alert("Permission to share location information denied.");
+                    break;
+                default:
+                    alert("An unknown error occured");
+            }
+        }
+        //window.onload = customDirectionsRenderer;
+
+
+        function customDirectionsRenderer(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                var bounds = new google.maps.LatLngBounds();
+                var route = response.routes[0];
+                var path = response.routes[0].overview_path;
+                var legs = response.routes[0].legs;
+                for (i = 0; i < legs.length; i++) {
+                    var polyline = new google.maps.Polyline({
+                        map: map,
+                        strokeColor: "lime",
+                        path: []
+                    });
+                    polyline.addListener('click', function(e) {
+                        console.log(e.latLng.toUrlValue(6));
+                    })
+                    polylines.push(polyline);
+                    if (i == 1) {
+                        polyline.setOptions({
+                            strokeColor: "red"
+                        });
+                    }
+                    var steps = legs[i].steps;
+                    for (j = 0; j < steps.length; j++) {
+                        var nextSegment = steps[j].path;
+                        for (k = 0; k < nextSegment.length; k++) {
+                            polyline.getPath().push(nextSegment[k]);
+                            bounds.extend(nextSegment[k]);
+                        }
+                    }
+                }
+
+                polyline.setMap(map);
+                map.fitBounds(bounds);
+
+                // var loc = new google.maps.LatLng(43.649865, -79.435208); // 43.649873, -79.435206);
+
+                if (polylines.length == addresses.length) {
+
+                    var markerA = new google.maps.Marker({
+                        position: loc1,
+                        title: "point A",
+                        label: "A",
+                        map: map
+                    })
+                    var markerB = new google.maps.Marker({
+                        position: loc,
+                        title: "point B",
+                        label: "B",
+                        map: map
+                    });
+                    // alert("located at: " + loc1);
+
+
+                    // for (k = 0; k < polylines.length; k++) {
+                    //     if (google.maps.geometry.poly.isLocationOnEdge(loc1, polylines[k], 1e-3)) {
+                    //         alert("en route " + addresses[k]);
+
+                    //     } else {
+                    //         alert("not en route " + addresses[k]);
+                    //     }
+                    // }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

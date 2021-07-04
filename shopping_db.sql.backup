@@ -1,0 +1,157 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 22, 2020 at 05:48 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `shopping_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_product`
+--
+
+CREATE TABLE `tbl_product` (
+  `p_id` int(11) NOT NULL,
+  `p_name` varchar(200) NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `p_detail` text NOT NULL,
+  `p_price` int(50) NOT NULL,
+  `p_img` varchar(200) NOT NULL,
+  `datesave` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_product`
+--
+
+INSERT INTO `tbl_product` (`p_id`, `p_name`, `type_id`, `p_detail`, `p_price`, `p_img`, `datesave`) VALUES
+(1, 'ขนมปังแพ', 1, 'หอมหวาน อร่อย', 12, 'p_img170362282720200822_151222.jpg', '2020-08-22 08:12:22'),
+(2, 'บราวนี่', 3, 'หวาน หอม อร่อย', 25, 'p_img182237222620200822_151247.jpg', '2020-08-22 08:12:47'),
+(3, 'คุกกี้', 2, 'กรอบนอก นุ่มใน', 25, 'p_img149081448220200822_151312.jpg', '2020-08-22 08:13:12'),
+(4, 'ขนมปังแพ', 1, 'หวาน หอม อร่อย', 12, 'p_img167844211720200822_160843.jpg', '2020-08-22 09:08:43'),
+(5, 'คุกกี คอนเฟล', 2, 'กรอบนอก มัน นุ่มใน', 25, 'p_img74298316120200822_160941.jpg', '2020-08-22 09:09:41'),
+(6, 'เนยสด', 1, 'อร่อย นุ่มนิ่ม', 25, 'p_img56452018020200822_161013.jpg', '2020-08-22 09:10:13'),
+(7, 'บราวนี่', 3, 'อร่อย มากกก', 25, 'p_img117428050020200822_161055.jpg', '2020-08-22 09:10:55'),
+(8, 'ฝอยทอง', 1, 'หวาน ชื่นใจ', 12, 'p_img3791873320200822_161125.jpg', '2020-08-22 09:11:25'),
+(9, 'พิซซ่า', 1, 'นุ่มนิ่ม', 12, 'p_img158197118020200822_161153.jpg', '2020-08-22 09:11:53'),
+(10, 'มะพร้าว', 1, 'หวาน', 12, 'p_img96233527520200822_161212.jpg', '2020-08-22 09:12:12'),
+(11, 'ไมโล', 1, 'กลมกล่อม', 25, 'p_img91446075220200822_161237.jpg', '2020-08-22 09:12:37'),
+(12, 'ไส้กรอกหมูหยอง​น้ำสลัด', 1, 'อร่อยมากกกก', 12, 'p_img119660524920200822_161254.jpg', '2020-08-22 09:12:54'),
+(13, 'เค้ก', 12, 'ครีม', 100, 'p_img139072020220200822_164716.jpg', '2020-08-22 09:47:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_type`
+--
+
+CREATE TABLE `tbl_type` (
+  `type_id` int(11) NOT NULL,
+  `type_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_type`
+--
+
+INSERT INTO `tbl_type` (`type_id`, `type_name`) VALUES
+(1, 'ขนมปัง'),
+(2, 'คุกกี้'),
+(3, 'บราวนี่'),
+(12, 'เค้ก');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `ID` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `lastname` text NOT NULL,
+  `tel` text NOT NULL,
+  `username` text NOT NULL,
+  `password` text NOT NULL,
+  `email` text NOT NULL,
+  `T_Face` text NOT NULL,
+  `addr` text NOT NULL,
+  `status` int(11) NOT NULL,
+  `trn_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`ID`, `name`, `lastname`, `tel`, `username`, `password`, `email`, `T_Face`, `addr`, `status`, `trn_date`) VALUES
+(1, 'อมฤต', 'ละน้อย', '0908529709', 'dookprox1', '123456', 'dookprox1@gmail.com', '', '466/19', 0, NULL),
+(2, 'ทดสอบ', 'ระบบ', '0908529709', 'dookprox2', '123456', 'dookprox2@gmail.com', '', '466/225', 1, NULL),
+(3, 'oil', 'oil', '0123456789', 'adminoil1', '123456', 'oil001@gmail.com', '', '', 1, '2020-08-22 16:45:51'),
+(4, 'useroil', 'lasoil', '0123456789', 'useroil', '123456', 'oil001@gmail.com', '', '466/225', 0, '2020-08-22 16:46:41');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  ADD PRIMARY KEY (`p_id`);
+
+--
+-- Indexes for table `tbl_type`
+--
+ALTER TABLE `tbl_type`
+  ADD PRIMARY KEY (`type_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tbl_type`
+--
+ALTER TABLE `tbl_type`
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

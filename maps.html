@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Geolocation</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- jsFiddle will insert css and js -->
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        
+        #map {
+            height: 50%;
+            width: 50%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .custom-map-control-button {
+            appearance: button;
+            background-color: #fff;
+            border: 0;
+            border-radius: 2px;
+            box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            margin: 10px;
+            padding: 0 0.5em;
+            height: 40px;
+            font: 400 18px Roboto, Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        .custom-map-control-button:hover {
+            background: #ebebeb;
+        }
+        
+        #directions-map {
+            width: 90vw;
+            height: 75vh;
+            margin: 0 auto;
+            background-color: aquamarine;
+            padding: 1.2em;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2> directions </h2>
+
+    <div id="map"></div>
+
+    <section id="directions">
+        <h2> directions map</h2>
+        <button id="get-directions"> get directions </button>
+        <p id="directions-info">map should appear here</p>
+    </section>
+
+
+
+
+    <script>
+        // Note: This example requires that you consent to location sharing when
+        // prompted by your browser. If you see the error "The Geolocation service
+        // failed.", it means you probably did not give permission for the browser to
+        // locate you.
+        let map, marker, infoWindow;
+
+        function DrawRuteMap() {
+            var my_lat = 17.3986732;
+            var my_lng = 102.7937337;
+            var your_lat = 17.3989518;
+            var your_lng = 102.7924085;
+            var start = new google.maps.LatLng(my_lat, my_lng);
+            var end = new google.maps.LatLng(your_lat, your_lng);
+
+            var request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionService.route(request, function(response, status) {
+                if (status == google.maps.DirectionStatus.OK) {
+                    directionDisplay.setDirection(respons);
+                    directionDisplay.setMap(map);
+                    directionDisplay.setOptions({
+                        suppressMarkers: false
+                    });
+                }
+            });
+        }
+        DrawRuteMap();
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: 17.3986732,
+                    lng: 102.7937337,
+                },
+                zoom: 17
+            });
+
+            marker = new google.maps.Marker({
+                position: {
+                    lat: 17.3986732,
+                    lng: 102.7937337
+                },
+                map,
+                title: "Hello World เธอ.ฉัน.โลก.เรา เดอะมูฟวี่ พากย์ไทย และ ซับไทย",
+            });
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                map.setCenter(initialLocation);
+                marker.setPosition(initialLocation);
+            });
+            infoWindow = new google.maps.InfoWindow();
+            const locationButton = document.createElement("button");
+            locationButton.textContent = "Pan to Current Location";
+            locationButton.classList.add("custom-map-control-button");
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+            locationButton.addEventListener("click", () => {
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                            };
+                            infoWindow.setPosition(pos);
+                            infoWindow.setContent("Location found.");
+                            infoWindow.open(map);
+                            map.setCenter(pos);
+                        },
+                        () => {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        }
+                    );
+
+                    DrawRuteMap();
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            });
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(
+                browserHasGeolocation ?
+                "Error: The Geolocation service failed." :
+                "Error: Your browser doesn't support geolocation."
+            );
+            infoWindow.open(map);
+        }
+    </script>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbvy9FRDIpuVpWYzYkJyVb42DCbbIKwd8&callback=initMap&sensor=true" type="text/javascript"></script>
+
+</body>
+
+</html>
